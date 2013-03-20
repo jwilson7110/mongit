@@ -1,0 +1,75 @@
+
+<html>
+	<head>
+	
+		<link type="text/css" rel="stylesheet" href="/style/main.css" />
+		<link type="text/css" rel="stylesheet" href="/style/summary.css" />
+
+		<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+		<script type="text/javascript" src="/script/jquery.js"></script>
+		<script type="text/javascript" src="/script/socket.js"></script>
+		<script type="text/javascript" src="/script/summary.js"></script>
+	
+	</head>
+
+	<body>
+
+		<div id="menu">
+			<div><a href="/index/controlPanel">Control Panel</a></div>
+			<div><a href="http://peo1.gennum.com:8080/git/">Browse Git</a></div>
+		</div>
+
+		@for(var serverName in locals.servers){
+
+			var server = locals.servers[serverName];
+
+			<div class="server clear" serverName="@server.name">
+			
+				<div class="serverLabel">
+					@server.name
+				</div>
+			
+				<div class="server-dead">
+					Mongit is not running on this server
+				</div>
+
+				<div class="server-alive">
+					<table class="processes">
+						<tr class="header">
+							<td class="processName">Process</td>
+							<td>&nbsp;</td>
+							<td class="status">Status</td>
+							<td class="processId">Process Id</td>
+							<td class="upTime">Up Time</td>
+							<td class="memoryKb">Memory Kb</td>
+							<td class="memoryPercent">Memory Percent</td>
+							<td class="cpuPercent">Cpu Percent</td>
+						</tr>
+
+						@for (var processName in server.processData){
+
+							var process = server.processData[processName];
+					
+							<tr class="process clear" processName="@process.name">
+								<td class="processName"><a href="@process.href" target="_blank">@process.name</a></td>
+								<td class="log"><a href="@process.logHref" target="_blank">Log</a></td>
+								<td class="state">@process.state</td>
+								<td class="processId">@process.pid</td>
+								<td class="upTime">@process.status.upTime</td>
+								<td class="memoryKb">@process.status.memoryKb</td>
+								<td class="memoryPercent">@process.status.memoryPercent</td>
+								<td class="cpuPercent">@process.status.cpuPercent</td>
+								
+							</tr>
+						}
+		
+					</table>
+				</div>
+			</div>
+		}
+
+
+		
+		<div id="debug"></div>
+	</body>
+</html>

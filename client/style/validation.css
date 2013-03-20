@@ -1,0 +1,65 @@
+.error{
+	color: red;
+	display:none;
+}
+
+
+.infoBox, .successBox, .warningBox, .errorBox{
+	display:none;
+
+	border: 4px solid;
+	margin: 20px;
+	padding: 20px;
+	
+}
+
+
+.infoBox {
+	color: #00529B;
+	background-color: #BDE5F8;
+	border-color: #00529B;	
+}
+
+.infoBox a{
+	color: #00529B;
+	font-weight:bold;
+}
+
+
+.successBox {
+	color: #4F8A10;
+	background-color: #DFF2BF;
+	border-color: #4F8A10;
+	
+}
+
+.successBox a{
+	font-weight:bold;
+	color:#4F8A10;
+}
+
+
+.warningBox {
+	color: #9F6000;
+	background-color: #FEEFB3;
+	border-color: #9F6000;
+	
+}
+
+
+.errorBox {
+	color: #D8000C;
+	background-color: #FFBABA;
+	border-color: #D8000C;
+	
+}
+
+.errorBox-header, .successBox-header, .warningBox-header{
+	font-size:17px;
+	font-weight:bold;
+}
+
+.errorBox-items, .warningBox-items{
+	margin-left:15px;
+	margin-top:5px;
+}

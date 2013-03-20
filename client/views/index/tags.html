@@ -1,0 +1,24 @@
+
+<jshtml>
+@for (var i = locals.tags.length - 1; i >= 0; --i){
+	var tag = locals.tags[i];
+
+	<tr tagName="@tag.name" class="tag">
+		<td class="tagName">@tag.name</td>
+		<td class="tagDate">[@tag.date]</td>
+		@for (var serverName in locals.servers){
+			
+			<td tagName="@tag.name" serverName="@serverName" class="tagSelector">
+				<div class="active"><img src="/images/active.png" /></div>
+				<div class="inactive"><img class="btnCheckout" src="/images/update.gif" /></div>
+				<div class="wait"><img src="/images/wait.png" /></div>
+				<div class="down"><img src="/images/serverdown.png" /></div>
+			</td>
+		}
+
+		<td class="tagSubject">@tag.subject</td>
+		
+	</tr>
+}
+
+</jshtml>

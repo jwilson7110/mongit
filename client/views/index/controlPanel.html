@@ -1,0 +1,183 @@
+<html>
+	<head>
+		<link type="text/css" rel="stylesheet" href="/style/main.css" />
+		<link type="text/css" rel="stylesheet" href="/style/validation.css" />
+		<link type="text/css" rel="stylesheet" href="/style/controlPanel.css" />
+
+		<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+		<script type="text/javascript" src="/script/jquery.js"></script>
+		<script type="text/javascript" src="/script/socket.js"></script>
+		<script type="text/javascript" src="/script/uuid.js"></script>
+		<script type="text/javascript" src="/script/tooltip.js"></script>
+
+		<script type="text/javascript" src="/script/controlPanel/main.js"></script>
+		<script type="text/javascript" src="/script/controlPanel/process.js"></script>
+		<script type="text/javascript" src="/script/controlPanel/server.js"></script>
+		<script type="text/javascript" src="/script/controlPanel/tag.js"></script>
+		<script type="text/javascript" src="/script/controlPanel/tagSelector.js"></script>
+	</head>
+
+	<body>
+
+		<div id="menu">
+			<div><a href="/index/summary">Summary</a></div>
+			<div><a href="http://peo1.gennum.com:8080/git/">Browse Git</a></div>
+		</div>
+		
+		<div id="processes">
+			@for(var processName in locals.processes){
+
+				<div processName="@processName" class="process" state="collapsed">
+					<div class="processLabel">@processName</div>				
+
+					<div class="processBorder">
+						<div class="processBody">
+
+							<table class="servers">
+								<tr class="header">
+									<td class="serverName">Server</td>
+									<td class="state">State</td>
+									<td class="processId">Process Id</td>
+									<td class="upTime">Up Time</td>
+									<td class="memoryKb">Memory in Kilobytes</td>
+									<td class="memoryPercent">Percent of Memory</td>
+									<td class="cpuPercent">Percent of cpu</td>
+								</tr>
+
+
+								@for(var serverName in locals.servers){
+									var server = locals.servers[serverName];
+
+									var process = server.processData[processName];
+									
+
+									<tr serverName="@server.name" class="server" state="ready">
+										<td class="serverName">
+											<a href="@process.href" target="_blank">@server.name</a>
+											@if (process){
+												if(process.activeTag){
+													<span>&nbsp;(@process.activeTag)</span>
+												}
+											}
+										</td>
+										<td class="state">
+											<div class="active"><img src="/images/on.png" /></div>
+											<div class="stopped"><img src="/images/off.png" /></div>
+											<div class="pending"><img src="/images/wait.png" /></div>
+											<div class="start"><img src="/images/start.gif" /></div>
+											<div class="starting"><img src="/images/start.gif" /></div>
+											<div class="started"><img src="/images/start.gif" /></div>
+											<div class="stop"><img src="/images/stop.png" /></div>
+											<div class="restart"><img src="/images/restart.jpeg" /></div>
+											<div class="checkout"><img src="/images/update.gif" /></div>
+											<div class="down"><img src="/images/serverdown.png" /></div>
+										</td>
+										<td class="processId">
+											<div class="value">@process.pid</div>
+											<div class="wait"><img src="/images/wait.png"></div>
+											<div class="down"><img src="/images/serverdown.png"></div>
+										</td>
+										<td class="upTime">
+											<div class="value">@process.status.upTime</div>
+											<div class="wait"><img src="/images/wait.png"></div>
+											<div class="down"><img src="/images/serverdown.png"></div>
+										</td>
+
+										<td class="memoryKb">
+											<div class="value">@process.status.memoryKb</div>
+											<div class="wait"><img src="/images/wait.png"></div>
+											<div class="down"><img src="/images/serverdown.png"></div>
+										</td>
+
+										<td class="memoryPercent">
+											<div class="value">@process.status.memoryPercent</div>
+											<div class="wait"><img src="/images/wait.png"></div>
+											<div class="down"><img src="/images/serverdown.png"></div>
+										</td>
+										<td class="cpuPercent">
+											<div class="value">@process.status.cpuPercent</div>
+											<div class="wait"><img src="/images/wait.png"></div>
+											<div class="down"><img src="/images/serverdown.png"></div>
+										</td>
+										<td class="start">
+											<div class="value"><img class="btnStart" src="/images/start.gif" /></div>
+											<div class="wait"><img src="/images/wait.png"></div>
+											<div class="down"><img src="/images/serverdown.png"></div>
+										</td>
+										<td class="stop">
+											<div class="value"><img class="btnStop" src="/images/stop.png" /></div>
+											<div class="wait"><img src="/images/wait.png"></div>
+											<div class="down"><img src="/images/serverdown.png"></div>
+										</td>
+										<td class="restart">
+											<div class="value"><img class="btnRestart" src="/images/restart.jpeg" /></div>
+											<div class="wait"><img src="/images/wait.png"></div>
+											<div class="down"><img src="/images/serverdown.png"></div>
+										</td>
+										<td class="restart">
+											<a href="@process.logHref" target="_blank"><img src="/images/log.jpg" /></a>		
+										</td>
+									</tr>
+
+									
+								}
+							</table>
+
+
+							<div class="tags">
+								<table>
+									<thead>
+										<tr>
+											<td class="tagName"><img class="btnFetch" src="/images/restart.jpeg" /></td>
+											<td class="tagDate">
+												<img class="btnUp" src="/images/up.png" />
+												<img class="btnDown" src="/images/down.png" />
+											</td>
+											@for (var serverName in locals.servers){
+												<td serverName="@serverName" class="serverTagHeader">@serverName</td>
+											}
+											<td class="tagSubject"></td>
+											
+										</tr>
+									</thead>
+									<tbody>
+										
+										@write(locals.tagsHtml[processName]);
+									
+									</tbody>
+								</table>
+							</div>
+						
+
+							<div class="queue infoBox"></div>
+							<div class="result"></div>
+
+
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+		<div class="tooltip" target=".btnStart">Start</div>
+		<div class="tooltip" target=".btnStop">Stop</div>
+		<div class="tooltip" target=".btnRestart">Restart</div>
+		<div class="tooltip" target=".btnCheckout">Checkout this tag</div>
+		<div class="tooltip" target=".btnFetch">Update this list of tags</div>
+		<div class="tooltip" target=".tag .active img">This Tag Is Active</div>
+		<div class="tooltip" target=".wait img">A Command is being<br />Executed on this Process</div>
+		<div class="tooltip" target=".down img">Server is not Running Mongit</div>
+		<div class="tooltip" target=".state .active img">This Process is running</div>
+		<div class="tooltip" target=".state .stopped img">This Process has been halted</div>
+		<div class="tooltip" target=".state .pending img">This Process is waiting to attemp a restart</div>
+		<div class="tooltip" target=".state .starting img">This Process is attempting to start</div>
+		<div class="tooltip" target=".state .start img">This Process is being Started</div>
+		<div class="tooltip" target=".state .stop img">This Process is being Stopped</div>
+		<div class="tooltip" target=".state .restart img">This Process is being Restarted</div>
+		<div class="tooltip" target=".state .update img">This Process is being Updated</div>
+		<div class="tooltip" target=".btnUp">Scroll Tags Up</div>
+		<div class="tooltip" target=".btnDown">Scroll Tags Down</div>
+		
+
+
+	</body>
+</html>

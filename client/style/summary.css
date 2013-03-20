@@ -1,0 +1,36 @@
+
+
+#menu{
+	border-bottom:1px solid black;
+
+	padding-bottom:10px;
+	padding-left:10px;
+
+	margin-bottom:10px;
+	margin-top:10px;
+	
+}
+
+.server{	
+	margin-bottom:20px;
+	
+}
+
+.server-dead{
+	display:none;
+}
+
+.serverLabel{	
+	font-weight:bold;
+	font-size:16px;	
+
+	margin-left:10px;
+}
+
+.header td{
+	font-weight:bold;
+}
+
+td{
+	width:150px;
+}

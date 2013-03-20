@@ -1,0 +1,206 @@
+
+
+#menu {
+	border-bottom:1px solid black;
+
+	padding-bottom:10px;
+	padding-left:10px;
+
+	margin-bottom:10px;
+	margin-top:10px;
+	
+}
+
+
+.tooltip{
+	border: 1px solid black;
+	background-color: beige;
+
+	padding-top:2px;
+	padding-bottom:2px;
+	padding-left:4px;
+	padding-right:4px;
+
+	z-index:100
+}
+
+#processes{
+
+}
+
+.process{
+	
+	position: relative;
+
+	margin-left:20px;
+	margin-right:20px;
+	margin-top:20px;
+	margin-bottom:40px;
+}
+
+.processLabel{
+	position: absolute;
+
+	background-color:#fff;
+	font-weight:bold;
+	font-size:22px;
+
+	top: -15px;
+	left: 25px;
+
+	cursor: pointer;
+}
+
+.processBorder{
+	border:1px #aaa solid;
+
+	margin-top:20px;
+	margin-bottom:20px;
+
+	overflow: hidden;
+}
+
+.processBody{
+	
+	padding:20px;
+	display: none;
+	
+}
+
+
+.servers{
+	width:100%;
+}
+
+.servers .header{
+	font-weight:bold;
+}
+
+.servers td{
+	padding-left:10px;
+	padding-right:10px;
+}
+
+.wait, 
+.down, 
+.active,
+.state .running,
+.state .pending,
+.state .starting,
+.state .started,
+.state .start,
+.state .stopped,
+.state .stop,
+.state .restart,
+.state .checkout {
+	display: none;
+}
+
+
+.active img,
+.pending img, 
+.wait img, 
+.down img, 
+.start img,
+.started img,
+.starting img,
+.stop img,
+.stopped img,
+.restart img,
+.checkout img{
+
+	width: 23px;
+	height: 23px;
+}
+
+.btnCheckout,
+.btnStart,
+.btnStop,
+.btnRestart,
+.btnFetch{
+	width:23px;
+	height:23px;
+
+	cursor:pointer;
+
+}
+
+thead .tagDate{
+	text-align:right;
+}
+
+.btnUp,
+.btnDown{
+	text-align: right;
+
+	width:50px;
+	height:40px;
+
+	cursor:pointer;
+
+}
+
+
+.tags {
+	margin-top:15px;	
+}
+
+
+.tags thead{
+	font-weight: bold;
+}
+
+
+
+.tags td{
+	padding-left:6px;
+	padding-right:6px;
+}
+
+.tagName{
+	font-weight: bold;
+}
+
+.tagSubject{
+	font-style: italic;
+}
+
+
+.server-dead{
+	display:none;
+}
+
+
+
+.queue-item{
+	height:25px;
+}
+
+.queue-item-command{
+	float:left;
+
+	margin-top:4px;
+	margin-right:6px;
+}
+
+.queue-item-confirm{
+	float:left;
+
+	width:25px;
+	height:25px;
+	margin-right:6px;
+
+	cursor:pointer;
+}
+
+.queue-item-cancel{
+	float:left;
+
+	width:22px;
+	height:22px;
+
+	cursor:pointer;
+}
+
+
+
